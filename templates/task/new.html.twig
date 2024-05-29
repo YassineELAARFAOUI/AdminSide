@@ -1,0 +1,42 @@
+{# templates/task/new.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Admin</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<body>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" id="loginButton" class="loginBtn">Login</button>
+    {{ form_end(form) }}
+
+    <script>
+        document.getElementById('loginButton').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+
+            fetch('{{ path('loginAdmin') }}', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.isBlocked === 1) {
+                    alert('Your account is blocked');
+                } else if (data.login === 1) {
+                    alert('Authentification réussie');
+                    window.location.href = '{{ path('viewAllClientbyadmin') }}';
+                } else {
+                    alert(data.error || 'Une erreur est survenue');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

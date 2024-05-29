@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des comptes business{% endblock %}
+
+{% block body %}
+    <h1>Liste des comptes business</h1>
+    <form action="{{ path('viewAllClientbyadmin') }}" method="get">
+        <button type="submit" class="btn btn-primary">Voir les comptes clients</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom complet</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>CIN/Passport</th>
+                <th>Pays</th>
+                <th>Mot de passe</th>
+                <th>Patente d'hôtel</th>
+                <th>Statut de blocage</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for accBusiness in allAccBusiness %}
+                <tr>
+                    <td>{{ accBusiness.AccBusinessId }}</td>
+                    <td>{{ accBusiness.fullName }}</td>
+                    <td>{{ accBusiness.email }}</td>
+                    <td>{{ accBusiness.phone }}</td>
+                    <td>{{ accBusiness.cinOrPassport }}</td>
+                    <td>{{ accBusiness.country }}</td>
+                    <td>{{ accBusiness.password }}</td>
+                    <td>{{ accBusiness.pattenteDehotele }}</td>
+                    <td>{% if accBusiness.block %}Bloqué{% else %}Non bloqué{% endif %}</td>
+                    <td>
+                        <form action="{{ path('blockOrDeblockaccBusinessByAdmin', { 'id':  accBusiness.AccBusinessId, 'block':  accBusiness.block ? 1 : 0 }) }}" method="post">
+                            <input type="hidden" id="token_{{ accBusiness.AccBusinessId }}" name="_token" value="{{ csrf_token('accBusiness_block_' ~ accBusiness.AccBusinessId) }}">
+                            <button type="submit" class="btn" id="blockBtn_{{ accBusiness.AccBusinessId }}" name="blockBtn">
+                                {% if accBusiness.block %}Débloquer{% else %}Bloquer{% endif %}
+                            </button>
+                        </form>    
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

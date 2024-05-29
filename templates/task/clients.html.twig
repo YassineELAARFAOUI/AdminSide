@@ -1,0 +1,48 @@
+{# templates/client/list.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des clients{% endblock %}
+
+{% block body %}
+    <h1>Liste des clients</h1>
+    
+    {# Formulaire avec un bouton pour voir les comptes Business #}
+    <form action="{{ path('viewAllaccBusinessbyadmin') }}" method="get">
+        <button type="submit" class="btn btn-primary">Voir les comptes Business</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom complet</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Mot de passe</th>
+                <th>Statut de blocage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.ClientId }}</td>
+                    <td>{{ client.fullName }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone }}</td>
+                    <td>{{ client.password }}</td>
+                    <td>{% if client.block %}Bloqué{% else %}Non bloqué{% endif %}</td>
+                    <td>
+                        <form action="{{ path('blockOrDeblockClientByAdmin', { 'id': client.ClientId, 'block': client.block ? 1 : 0 }) }}" method="post">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_token" value="{{ csrf_token('block_client_' ~ client.ClientId) }}">
+                            <button type="submit" class="btn">
+                                {% if client.block %}Débloquer{% else %}Bloquer{% endif %}
+                            </button>
+                        </form>                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+{% endblock %}
