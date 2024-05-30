@@ -1,0 +1,123 @@
+body{
+    margin: 0 auto;
+    background-color: white;
+}
+.TitleClient{
+    flex: 1;
+    height: 60PX;
+    background-color: #1d4ac5;
+    color: white;
+    font-size: 25PX;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 25PX;
+}
+.PlaceBtnChanePage{
+    flex: 1;
+    height: 60PX;
+    color: white;
+    font-size: 25PX;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 25PX;
+    margin-top: 10PX;
+}
+.Btn{
+    width: 200PX;
+    height: 50PX;
+    background-color: #d6b51a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: none;
+    outline: none;
+    padding: 0PX;
+    border-radius: 5PX;
+    font-weight: bold;
+    font-size: 17PX;
+    cursor: pointer;
+}
+.Btn:hover{
+    background-color: #bb9e1b;
+}
+.table{
+    flex: 1;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-top: 30PX;
+}
+.tableCenter{
+    width: 100%;
+    max-width: 1000PX;
+    height: fit-content;
+    background-color: rgb(0, 81, 255);
+}
+.top{
+    width: 100%;
+    height: 60PX;
+    background-color: #1d4ac5;
+    display: flex;
+    justify-content: space-between;
+}
+.bottom{
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(0, 119, 255);
+}
+.topItem{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 20PX;
+    color: white;
+}
+.itemList{
+    width: 100%;
+    height: 60PX;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1PX solid rgb(188, 188, 188);
+}
+.topItem2{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 14PX;
+    color: rgb(27, 27, 27);
+    cursor: pointer;
+    overflow: hidden;
+}
+.itemList:hover{
+    background-color: rgb(240, 240, 240);
+}
+.BtnBlock{
+    width: 150PX;
+    height: 40PX;
+    border: none;
+    outline: none;
+    padding: 0PX;
+    cursor: pointer;
+    color: white;
+}
+.btnRed{
+    background-color: #ff3636;
+    color: white;
+}
+.btnNormal{
+    background-color: #ebebeb;
+    color: black;
+}

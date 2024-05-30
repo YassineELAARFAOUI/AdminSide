@@ -7,36 +7,49 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" id="loginButton" class="loginBtn">Login</button>
-    {{ form_end(form) }}
+    <div class="page">
+        <div class="formPlace">
+            <div class="title">Log in as admin</div>
+            <div class="placeInps">
+                <div class="placeInpsCenter">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" id="loginButton" class="loginBtn">Login</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="Img">
+            <img src="./imgs/bg.jpg" class="bg" alt="">
+        </div>
+    </div>
 
     <script>
-        document.getElementById('loginButton').addEventListener('click', function(event) {
-            event.preventDefault();
+    document.getElementById('loginButton').addEventListener('click', function(event) {
+        event.preventDefault();
 
-            const form = document.querySelector('form');
-            const formData = new FormData(form);
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
 
-            fetch('{{ path('loginAdmin') }}', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.isBlocked === 1) {
-                    alert('Your account is blocked');
-                } else if (data.login === 1) {
-                    alert('Authentification réussie');
-                    window.location.href = '{{ path('viewAllClientbyadmin') }}';
-                } else {
-                    alert(data.error || 'Une erreur est survenue');
-                }
-            })
-            .catch(error => console.error('Error:', error));
+        fetch('{{ path('loginAdmin') }}', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.login === 1) {
+                window.location.href = '{{ path('viewAllClientbyadmin') }}'; // Corrected path
+            } else {
+                alert('Email or Password incorrect');
+                // alert(content.error || 'Une erreur est survenue');
+            }
+        })
+        .catch(error =>{
+            console.error('Error:', error);
         });
-    </script>
+    });
+</script>
+
+
 </body>
 </html>

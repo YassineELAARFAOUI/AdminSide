@@ -2,47 +2,48 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des clients{% endblock %}
+{% block title %}Customer List{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/client.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des clients</h1>
+    <div class="TitleClient">Customer List</div>
     
     {# Formulaire avec un bouton pour voir les comptes Business #}
-    <form action="{{ path('viewAllaccBusinessbyadmin') }}" method="get">
-        <button type="submit" class="btn btn-primary">Voir les comptes Business</button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom complet</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Mot de passe</th>
-                <th>Statut de blocage</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for client in clients %}
-                <tr>
-                    <td>{{ client.ClientId }}</td>
-                    <td>{{ client.fullName }}</td>
-                    <td>{{ client.email }}</td>
-                    <td>{{ client.phone }}</td>
-                    <td>{{ client.password }}</td>
-                    <td>{% if client.block %}Bloqué{% else %}Non bloqué{% endif %}</td>
-                    <td>
-                        <form action="{{ path('blockOrDeblockClientByAdmin', { 'id': client.ClientId, 'block': client.block ? 1 : 0 }) }}" method="post">
-                            <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="_token" value="{{ csrf_token('block_client_' ~ client.ClientId) }}">
-                            <button type="submit" class="btn">
-                                {% if client.block %}Débloquer{% else %}Bloquer{% endif %}
-                            </button>
-                        </form>                        
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <br>
+    <div class="PlaceBtnChanePage">
+        <form action="{{ path('viewAllaccBusinessbyadmin') }}" method="get">
+            <button type="submit" class="Btn">Comptes Business</button>
+        </form>
+    </div>
+    <div class="table">
+        <div class="tableCenter">
+            <div class="top">
+                <div class="topItem">Name</div>
+                <div class="topItem">Email</div>
+                <div class="topItem">Phone</div>
+                <div class="topItem">Status</div>
+            </div>
+            <div class="bottom">
+                {% for client in clients %}
+                    <div class="itemList">
+                        <div class="topItem2">{{ client.fullName }}</div>
+                        <div class="topItem2">{{ client.email }}</div>
+                        <div class="topItem2">{{ client.phone }}</div>
+                        <div class="topItem">
+                            <form action="{{ path('blockOrDeblockClientByAdmin', { 'id': client.ClientId, 'block': client.block ? 1 : 0 }) }}" method="post">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="_token" value="{{ csrf_token('block_client_' ~ client.ClientId) }}">
+                                <button type="submit" class="BtnBlock {% if client.block %}btnRed{% else %}btnNormal{% endif %}">
+                                    {% if client.block %}Unblock{% else %}Block{% endif %}
+                                </button>
+                            </form>    
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -42,7 +42,7 @@ class LoginAdminController extends AbstractController
             
             try {
                 // Appel à l'API distante pour l'authentification
-                $response = $this->httpClient->request('POST', 'https://127.0.0.1:8000/loginClient', [
+                $response = $this->httpClient->request('POST', 'https://127.0.0.1:8000/loginAdminfinal', [
                     'json' => [
                         'email' => $data['email'],
                         'password' => $data['password']
@@ -52,21 +52,17 @@ class LoginAdminController extends AbstractController
                 ]);
 
                 $statusCode = $response->getStatusCode();
-                $content = $response->toArray(false); // Désactiver l'exception sur 4xx/5xx
-                if ($content['isBlocked']) {
-                    // Authentification réussie
-                    return new JsonResponse(['login' => 0,'isBlocked' => 1]);
-                } 
-                if ($content['password'] === $data['password']) {
+                $content = $response->toArray(false); // Désactiver l'exception sur 4xx/5xx 
+                if ($content['password'] === hash('sha256', $data['password'])) {
                     // Authentification réussie
                     return new JsonResponse(['login' => 1,'content'=>$content,'message' => 'Authentification réussie']);
                 } else {
                     // Authentification échouée
-                    return new JsonResponse(['login' => 0,'error' =>  'Email et password sont incorrect']);
+                    return new JsonResponse(['login' => 0,'error' =>  'Email et password sont incorrect','pass'=>hash('sha256', $data['password'])]);
                 }
             } catch (\Exception $e) {
                 // Capture et affiche toute exception
-                return new JsonResponse(['login' => 0, 'error' => 'Erreur lors de l\'appel à l\'API : ' . $e->getMessage()]);
+                return new JsonResponse(['login' => 0,'error' => 'Erreur lors de l\'appel à l\'API : ' . $e->getMessage()]);
             }
         }
 

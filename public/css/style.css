@@ -1,15 +1,79 @@
-/* Contenu du fichier public/css/style.css */
-
-.loginBtn {
-    background-color: red;
-    color: white;
+body{
+    margin: 0 auto;
+}
+.page{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.formPlace{
+    width: 50%;
+    height: 100%;
+}
+.Img{
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+.bg{
+   height: 100%;
+}
+.title{
+   width: 100%;
+   height: 60PX;
+   margin-top: 50PX;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-weight: bold;
+   font-size: 40PX;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.placeInps{
+   width: 100%;
+   height: fit-content;
+   display: flex;
+   justify-content: center;
+   margin-top: 100PX;
+}
+.placeInpsCenter{
+   width: 80%;
+   height: fit-content;
+}
+.inp{
+    width: 95%;
+    height: 55PX;
     border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    outline: none;
+    padding: 0PX;
+    border: 1PX solid gray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 17PX;
+    padding-left: 10PX;
+    margin-bottom: 10PX;
+
+}
+.labinp{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 20PX;
+    margin-bottom: 5PX;
+}
+.loginBtn{
+    width: 200PX;
+    height: 55PX;
+    border: none;
+    outline: none;
+    padding: 0PX;
+    background-color: #1a7bb3ed;
     cursor: pointer;
-    border-radius: 4px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15PX;
+    font-size: 17PX;
+}
+.loginBtn:hover{
+    background-color: #1a7ab3;
 }

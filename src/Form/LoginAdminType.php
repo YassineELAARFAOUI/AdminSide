@@ -14,10 +14,24 @@ class LoginAdminType extends AbstractType
     {
         $builder
             ->add('email', TextType::class, [
-                'label' => 'email',
+                'label' => 'Email',
+                'attr' => [
+                    'class' => 'inp',
+                    'placeholder' => 'Email', // Add your desired classes here
+                ],
+                'label_attr' => [
+                    'class' => 'labinp', // Add the custom-label class for labels
+                ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Password',
+                'attr' => [
+                    'class' => 'inp',
+                    'placeholder' => 'Password', // Add your desired classes here
+                ],
+                'label_attr' => [
+                    'class' => 'labinp', // Add the custom-label class for labels
+                ],
             ])
         ;
     }
